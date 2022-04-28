@@ -1,0 +1,9 @@
+train = /content/drive/MyDrive/colab/p_eyes/train.txt
+val = /content/drive/MyDrive/colab/p_eyes/val.txt
+
+
+classes = 2
+
+names = /content/drive/MyDrive/colab/p_eyes/obj.names
+
+backup = backup/ 
