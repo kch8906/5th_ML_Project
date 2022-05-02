@@ -1,0 +1,5 @@
+nc : 2
+
+train : /home/lab19/team5_project/p_eyes/images/train
+val : /home/lab19/team5_project/p_eyes/images/train
+names : ['opened','closed']
