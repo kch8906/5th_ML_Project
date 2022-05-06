@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'eyes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eyes_db',
-        'USER': 'root',
-        'PASSWORD' : 'test1234',
+        'NAME': 'db_ml',
+        'USER': 'crysis',
+        'PASSWORD': 'ckdgus8906!',
         'HOST': '127.0.0.1',
-        'POST':'3306'
+        'POST': '3306'
     }
 }
 
