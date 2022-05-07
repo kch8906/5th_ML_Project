@@ -31,23 +31,47 @@ from pathlib import Path
 
 import torch
 import torch.backends.cudnn as cudnn
+
+############################################################################## 
 import pymysql
 pymysql.install_as_MySQLdb()
 import os.path
-FIFO_FILENAME = '/home/crysis/Workspace/5th_ML_Project/eyes_result/yolov5s_600/output/fifo-test'
+import time
+import serial
+from datetime import datetime
 
-db= pymysql.connect(
+# 아두이노 시리얼 전송 
+# ser = serial.Serial('/dev/ttyACM0', 9600) # Linux Arduino Serial Port
+
+# 데이터베이스 연결
+db= pymysql.connect( # db 연결
     user='root',
     passwd='ckdgus8906!',
     host='localhost',
     db='ml_db')
 
 cursor = db.cursor()
-sql = "INSERT INTO predict_label (label, value) VALUES (%s, %s)"
-cls_list = []
-i = 0
+sql = "INSERT INTO predict_label (label, total_sleep_count) VALUES (%s, %s)"
+query = "SELECT * FROM predict_label"
+cursor.execute(query)
+db.commit()
+datas = cursor.fetchall()
+previous_access = datas[-1][-1]
+
+# 사용할 변수 선언
+total_sleep_count = 0
 result = 0
 
+# 현재시간과 데이터베이스에 기록된 마지막 시간(previous)에 따라 total_sleep_count초기화 혹은 유지
+now = datetime.now()
+current_access = now.date()
+
+if current_access > previous_access:
+    total_sleep_count = 0
+elif current_access == previous_access:
+    total_sleep_count = datas[-1][1]
+    
+############################################################################## 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
 if str(ROOT) not in sys.path:
@@ -91,8 +115,9 @@ def run(
         half=False,  # use FP16 half-precision inference
         dnn=False,  # use OpenCV DNN for ONNX inference
 ):
+    # 전역변수 선언
     global result
-    global i
+    global total_sleep_count
     source = str(source)
     save_img = not nosave and not source.endswith('.txt')  # save inference images
     is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
@@ -178,14 +203,34 @@ def run(
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh  
                         line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format            
- #############################################################################                          
-                        result += t3 - t2 
-                        if result > 3 and int(cls.item()) == 0: 
-                            print('success')                         
-                            closed = ("closed",  str(int(cls.item())))
-                            cursor.execute(sql, closed)                     
-                            db.commit() 
-                        elif int(cls.item()) == 1:
+############################################################################## 
+#                         result += t3 - t2
+#                         if ser.readable():
+#                             val = str(int(cls.item()))
+#                             if result > 3 and int(cls.item()) == 0:
+#                                 print('success')
+#                                 closed = ("closed",  str(int(cls.item())))
+#                                 cursor.execute(sql, closed)
+#                                 db.commit()
+#                                 val = val.encode('utf-8')
+#                                 ser.write(val)
+#                                 print("SOUND TURNED ON")
+#                                 result = 0
+#                             elif int(cls.item()) == 1:
+#                                 val = val.encode('utf-8')
+#                                 ser.write(val)
+#                                 print("SOUND TURNED OFF")
+#                                 result = 0
+                                
+                        result += t3 - t2                       
+                        if result > 3 and int(cls.item()) == 0:
+                            total_sleep_count += 1
+                            print('success')
+                            closed = ("closed",  str(total_sleep_count))
+                            cursor.execute(sql, closed)
+                            db.commit()                            
+                            result = 0
+                        elif int(cls.item()) == 1:                            
                             result = 0   
 ##############################################################################                            
                         with open(txt_path + '.txt', 'a') as f:
