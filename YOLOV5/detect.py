@@ -41,35 +41,43 @@ import serial
 from datetime import datetime
 
 # 아두이노 시리얼 전송 
-# ser = serial.Serial('/dev/ttyACM0', 9600) # Linux Arduino Serial Port
+ser = serial.Serial('/dev/ttyACM4', 9600) # Linux Arduino Serial Port
 
 # 데이터베이스 연결
 db= pymysql.connect( # db 연결
-    user='root',
-    passwd='ckdgus8906!',
-    host='localhost',
+    user='guest_test',
+    passwd='test1234!',
+    host='121.143.172.28',
     db='ml_db')
 
 cursor = db.cursor()
-sql = "INSERT INTO predict_label (label, total_sleep_count) VALUES (%s, %s)"
-query = "SELECT * FROM predict_label"
+sql = "INSERT INTO co_eyes_predictlabel (label, total_sleep_count) VALUES (%s, %s)"
+query = "SELECT * FROM co_eyes_predictlabel"
 cursor.execute(query)
 db.commit()
 datas = cursor.fetchall()
-previous_access = datas[-1][-1]
+# if datas is None:
+#     pass
+# else:
+#     previous_access = datas[-1][-1]
+
 
 # 사용할 변수 선언
 total_sleep_count = 0
 result = 0
+onoff = 0
 
 # 현재시간과 데이터베이스에 기록된 마지막 시간(previous)에 따라 total_sleep_count초기화 혹은 유지
 now = datetime.now()
 current_access = now.date()
 
-if current_access > previous_access:
-    total_sleep_count = 0
-elif current_access == previous_access:
-    total_sleep_count = datas[-1][1]
+# if previous_access is not None:
+#     if current_access == previous_access:
+#         total_sleep_count = datas[-1][2]
+#     elif current_access > previous_access:
+#         total_sleep_count = 0
+# else:
+#     pass
     
 ############################################################################## 
 FILE = Path(__file__).resolve()
@@ -116,6 +124,7 @@ def run(
         dnn=False,  # use OpenCV DNN for ONNX inference
 ):
     # 전역변수 선언
+    global onoff
     global result
     global total_sleep_count
     source = str(source)
@@ -204,34 +213,37 @@ def run(
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh  
                         line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format            
 ############################################################################## 
-#                         result += t3 - t2
-#                         if ser.readable():
-#                             val = str(int(cls.item()))
-#                             if result > 3 and int(cls.item()) == 0:
-#                                 print('success')
-#                                 closed = ("closed",  str(int(cls.item())))
-#                                 cursor.execute(sql, closed)
-#                                 db.commit()
-#                                 val = val.encode('utf-8')
-#                                 ser.write(val)
-#                                 print("SOUND TURNED ON")
-#                                 result = 0
-#                             elif int(cls.item()) == 1:
-#                                 val = val.encode('utf-8')
-#                                 ser.write(val)
-#                                 print("SOUND TURNED OFF")
-#                                 result = 0
+                        result += t3 - t2
+                        if ser.readable():
+                            val = str(int(cls.item()))
+                            
+                            if result > 2 and int(cls.item()) == 0:
+                                onoff = 1
+                                total_sleep_count += 1
+                                closed = ("closed",  str(total_sleep_count))
+                                cursor.execute(sql, closed)
+                                db.commit()
+                                val = val.encode('utf-8')
+                                ser.write(val)
+                                print("SOUND TURNED ON")
+                                result = 0
+                            elif int(cls.item()) == 1 and onoff == 1:
+                                val = val.encode('utf-8')
+                                ser.write(val)
+                                print("SOUND TURNED OFF")
+                                result = 0
+                                onoff = 0
                                 
-                        result += t3 - t2                       
-                        if result > 3 and int(cls.item()) == 0:
-                            total_sleep_count += 1
-                            print('success')
-                            closed = ("closed",  str(total_sleep_count))
-                            cursor.execute(sql, closed)
-                            db.commit()                            
-                            result = 0
-                        elif int(cls.item()) == 1:                            
-                            result = 0   
+#                         result += t3 - t2                       
+#                         if result > 3 and int(cls.item()) == 0:
+#                             total_sleep_count += 1
+#                             print('success')
+#                             closed = ("closed",  str(total_sleep_count))
+#                             cursor.execute(sql, closed)
+#                             db.commit()                            
+#                             result = 0
+#                         elif int(cls.item()) == 1:                            
+#                             result = 0   
 ##############################################################################                            
                         with open(txt_path + '.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
