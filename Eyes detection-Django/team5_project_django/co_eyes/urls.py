@@ -1,8 +1,8 @@
-
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 from co_eyes import views
 
+app_name = 'co_eyes'
 urlpatterns = [
-    path('eyes/', views.co_eyes, name='co_eyes')
+    path('eyes/', views.co_eyes, name='eyes')
 ]
