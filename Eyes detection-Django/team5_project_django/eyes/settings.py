@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-uo=l42udp)c_5^okyr_=0z)_nt!06qbmqz5_&&c^@87y1@ut78
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'eyes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eyes_db',
-        'USER': 'root',
-        'PASSWORD' : 'test1234',
-        'HOST': '127.0.0.1',
-        'POST':'3306'
+        'NAME': 'ml_db',
+        'USER': 'guest_test',
+        'PASSWORD': 'test1234!',
+        'HOST': '121.143.172.28',
+        'POST': '3306'
     }
 }
 
