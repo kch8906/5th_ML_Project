@@ -1,4 +1,0 @@
-nc : 2
-train : /home/crysis/Workspace/5th_ML_Project/dataset/images/train
-val : /home/crysis/Workspace/5th_ML_Project/dataset/images/train
-names : ['closed', 'opened']
