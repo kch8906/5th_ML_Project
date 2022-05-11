@@ -1,0 +1,9 @@
+train : C:\jupyter_home\Machine_Learning\ML_Project_5th\5th_ML_Project\Data\eyes\images\train
+val : C:\jupyter_home\Machine_Learning\ML_Project_5th\5th_ML_Project\Data\eyes\images\train
+
+nc: 2
+names: [closed', 'opened']
+
+
+
+
