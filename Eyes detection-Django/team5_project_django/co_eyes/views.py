@@ -22,7 +22,7 @@ def predict(request):
     humid = float(humid)
     co2 = 1000
 
-    estimator = joblib.load(r'/home/crysis/Workspace/5th_ML_Project/Eyes detection-Django/team5_project_django/static/ml_model/temp_lightgbm.pkl')
+    estimator = joblib.load(r'C:\Users\a\Desktop\5th_ML_Project\Eyes detection-Django\team5_project_django\static\ml_model\temp_lightgbm.pkl')
 
     x_test = [[temp, humid, co2]]
 
