@@ -5,4 +5,5 @@ from co_eyes import views
 app_name = 'co_eyes'
 urlpatterns = [
     path('eyes/', views.predict, name='eyes')
+    # path('eyes/', views.graph, name='eyes'),
 ]
