@@ -43,29 +43,29 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid px-4">
+                    <div class="container-fluid px-4 text-center">
                         <h1 class="mt-2">졸음운전 하지마세요</h1>
                         <ol class="breadcrumb mb-4">
 {#                            <li class="breadcrumb-item active">Dashboard</li>#}
                         </ol>
                         <div class="row">
-                            <div class="col-sm-auto col-sm-auto">
+                            <div class="col-sm-auto text-center" style="width: 13rem";>
                                 <div class="card bg-warning text-white">
                                     <div class="card-body" >
                                         <span style=" font-size:15px; color:white; font-family: 'Arial Black'">온도</span></div>
                                         <div class="card-footer d-flex align-items-center justify-content-between">
                                         {% csrf_token %}
-                                            <span style=" font-size:20px; color:white; font-family: 'Arial'">
+                                            <span style=" text-align: right; font-size:20px; color:white; font-family: 'Arial'">
                                                 {{ temp }}°C  </span>
                                         <div class="small text-white"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-auto col-sm-auto">
+                            <div class="col-sm-auto text-center" style="width: 13rem;">
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body" >
                                         <span style=" font-size:15px; color:white; font-family: 'Arial Black'">이산화탄소</span></div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <div class="card-footer d-flex align-items-center justify-content-center">
                                         {% csrf_token %}
                                             <span style=" font-size:20px; color:white; font-family: 'Arial'">
                                                 {{ co2 }} rpm </span>
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-auto col-sm-auto">
+                            <div class="col-sm-auto text-center" style="width: 13rem;">
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body" >
                                         <span style=" font-size:15px; color:white; font-family: 'Arial Black'">습도</span></div>
