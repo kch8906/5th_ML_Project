@@ -37,7 +37,7 @@
         <img class="img_100" src="/static/img/drive02.png">
     </div>
 
-    <div class="box img_101">
+    <div class="box"> <!-- img_101 -->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3 F_leferi" href="main.html">졸음운전 통계</a>
@@ -51,15 +51,69 @@
 {#                </div>#}
 {#            </form>#}
         </nav>
-            <div id="layoutSidenav_content" style="background-color: red">
+            <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid px-4" style="background-color: blue">
+                    <div class="container-fluid px-4 text-center">
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
+                                            <div class="row">
+                            <div class="col-sm-auto" style="width:13rem">
+                                <div class="card bg-warning text-white">
+                                    <div class="card-body" >
+                                        <span class="F_col_w" style=" font-size:15px; color:white;">온도</span></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between text-center">
+                                        {% csrf_token %}
+                                            <span class="text-center" style=" font-size:20px; color:white;">
+                                                {{ temp }}°C  </span>
+                                        <div class="small text-white"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-auto text-center" style="width:13rem">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body" >
+                                        <span class="F_col_w" style=" font-size:15px;">이산화탄소</span></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                        {% csrf_token %}
+                                            <span class="F_col_w" style=" font-size:20px;">
+                                                {{ co2 }} rpm </span>
+                                        <div class="small text-white"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-auto text-center" style="width:13rem"">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body" >
+                                        <span class="F_col_w" style=" font-size:15px;">습도</span></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                        {% csrf_token %}
+                                            <span class="F_col_w text-center" style=" font-size:20px;">
+                                                {{ humid }}% </span>
+                                        <div class="small text-white"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
+                                    <div class="card text-center" style="width: auto;" >
+                                        {% if y_predict <= 50 %}
+                                            <span style="font-size: 20px;">
+                                                졸릴 확률이 높습니다. 환기를 시켜주세요</span>
+                                        {% else %}
+                                            <span style="font-size: 20px;">
+                                                안전운전 하십시요</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4" style="width: 20rem;">
 
                                     <div class="card-header">
                                         <i class="fas fa-chart-area me-1 F_col_b"></i>
@@ -97,6 +151,7 @@
                             </div>
                         </div>
                     </div>
+                <img class="img_100" src="/static/img/drive04.png">
 
                 </main>
 

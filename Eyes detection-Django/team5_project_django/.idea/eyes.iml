@@ -16,7 +16,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/django" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (team5_project_django)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (Eyes detection-Django)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
