@@ -5,11 +5,11 @@ from django.db import models
 
 class Predictlabel(models.Model):
     label = models.CharField(max_length=10)
-    total_sleep_count = models.CharField(max_length=10)
+    total_sleep_count = models.IntegerField()
     register_date = models.DateTimeField()
 
     def __str__(self):
-        return self.label
+        return self.label, self.total_sleep_count, self.register_date
 
 
 class Temp(models.Model):
