@@ -6,7 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>!!졸음운전 안돼!!</title>
+        <title>Drowsiness Detection</title>
+
+        <link rel="shortcut icon" href="#">
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -21,9 +23,21 @@
         <link href="/static/css/style.css" rel="stylesheet">
         <link href="/static/css/custom.css" rel="stylesheet">
 
+
+
+
     </head>
 
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" style="background-color: transparent">
+    <!-- JS -->
+    <script type="text/javascript" src="/static/js/custom_js.js"></script>
+
+
+    <div class="box" >
+        <img class="img_100" src="/static/img/drive02.png">
+    </div>
+
+    <div class="box img_101">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3 F_leferi" href="main.html">졸음운전 통계</a>
@@ -37,36 +51,43 @@
 {#                </div>#}
 {#            </form>#}
         </nav>
-            <div id="layoutSidenav_content">
+            <div id="layoutSidenav_content" style="background-color: red">
                 <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">"졸음운전, 당신은 얼마나 하셨나요?"</h1>
+                    <div class="container-fluid px-4" style="background-color: blue">
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
-
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
+
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        주간별 졸음 횟수
+                                        <i class="fas fa-chart-area me-1 F_col_b"></i>
+                                        <span class="F_KoPubDotumMedium"
+                                              style="font-size: 28px">주간별 졸음 횟수</span>
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                    {% csrf_token %}
-{#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
-                                    {% for y in y_predict %}
-                                        {{ y }}%
-                                    {% endfor %}
+
+                                    <div class="card-body">
+                                        <span class="F_col_b F_KOHIBaeumOTF">
+                                            {% csrf_token %}
+        {#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
+                                            {% for y in y_predict %}
+                                                {{ y }}%
+                                            {% endfor %}
+                                        </span>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
+
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar me-1"></i>
-                                        세로 막대 그래프
+                                        <span class="F_KoPubDotumMedium"
+                                              style="font-size: 28px">졸음 횟수 그래프</span>
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas>
+                                    <div class="card-body">
                                         <div class="container">
                                             <img src="/static/img/graph.png" alt="">
                                         </div>
@@ -76,18 +97,14 @@
                             </div>
                         </div>
                     </div>
+
                 </main>
-            <!--
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; team5_project eyes object detector</div>
-                        </div>
-                    </div>
-                </footer>
-            -->
+
             </div>
-        </div>
+    </div>
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -95,5 +112,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+
     </body>
 </html>
