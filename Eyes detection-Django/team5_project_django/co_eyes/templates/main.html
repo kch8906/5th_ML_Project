@@ -6,7 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>!!졸음운전 안돼!!</title>
+        <title>Drowsiness Detection</title>
+
+        <link rel="shortcut icon" href="#">
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -19,12 +21,26 @@
 
         <!-- Custom styles for this template -->
         <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
     </head>
 
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" style="background-color: transparent">
+    <!-- JS -->
+    <script type="text/javascript" src="/static/js/custom_js.js"></script>
+
+
+    <div class="box" >
+        <img class="img_100" src="/static/img/drive02.png">
+    </div>
+
+    <div class="box"> <!-- img_101 -->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="main.html">🚗졸음운전 통계🥱❌</a>
+            <a class="navbar-brand ps-3 F_leferi" href="main.html">졸음운전 통계</a>
 {#            <!-- Sidebar Toggle-->#}
 {#            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>#}
 {#            <!-- Navbar Search-->#}
@@ -35,35 +51,46 @@
 {#                </div>#}
 {#            </form>#}
         </nav>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                    <div class="container-fluid px-4 text-center">
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active"></li>
                         </ol>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">오늘 졸았던 횟수</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                            <div class="row">
+                            <div class="col-sm-auto" style="width:13rem">
+                                <div class="card bg-warning text-white">
+                                    <div class="card-body" >
+                                        <span class="F_col_w" style=" font-size:15px; color:white;">온도</span></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between text-center">
+                                        {% csrf_token %}
+                                            <span class="text-center" style=" font-size:20px; color:white;">
+                                                {{ temp }}°C  </span>
+                                        <div class="small text-white"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
+                            <div class="col-sm-auto text-center" style="width:13rem">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <div class="card-body" >
+                                        <span class="F_col_w" style=" font-size:15px;">이산화탄소</span></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                        {% csrf_token %}
+                                            <span class="F_col_w" style=" font-size:20px;">
+                                                {{ co2 }} rpm </span>
+                                        <div class="small text-white"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-auto text-center" style="width:13rem"">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body" >
+                                        <span class="F_col_w" style=" font-size:15px;">습도</span></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                        {% csrf_token %}
+                                            <span class="F_col_w text-center" style=" font-size:20px;">
+                                                {{ humid }}% </span>
+                                        <div class="small text-white"></div>
                                     </div>
                                 </div>
                             </div>
@@ -71,46 +98,68 @@
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        주간별 졸음 횟수
+                                    <div class="card text-center" style="width: auto;" >
+                                        {% if y_predict <= 50 %}
+                                            <span style="font-size: 20px;">
+                                                졸릴 확률이 높습니다. 환기를 시켜주세요</span>
+                                        {% else %}
+                                            <span style="font-size: 20px;">
+                                                안전운전 하십시요</span>
+                                        {% endif %}
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                    {% csrf_token %}
-{#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
-                                    {% for y in y_predict %}
-                                        {{ y }}%
-                                    {% endfor %}
-{#                                    {% for i in y_predict %}#}
-{#                                        {{ i }}#}
-{#                                    {% endfor %}#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4" style="width: 20rem;">
+
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1 F_col_b"></i>
+                                        <span class="F_KoPubDotumMedium"
+                                              style="font-size: 28px">주간별 졸음 횟수</span>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <span class="F_col_b F_KOHIBaeumOTF">
+                                            {% csrf_token %}
+        {#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
+                                            {% for y in y_predict %}
+                                                {{ y }}%
+                                            {% endfor %}
+                                        </span>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
+
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar me-1"></i>
-                                        세로 막대 그래프
+                                        <span class="F_KoPubDotumMedium"
+                                              style="font-size: 28px">졸음 횟수 그래프</span>
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas>
+                                    <div class="card-body">
                                         <div class="container">
-                                            <img src="/static/imgs/graph.png" alt="">
+                                            <img src="/static/img/graph.png" alt="">
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                <img class="img_100" src="/static/img/drive04.png">
+
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; team5_project eyes object detector</div>
-                        </div>
-                    </div>
-                </footer>
+
             </div>
-        </div>
+    </div>
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -118,5 +167,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+
     </body>
 </html>

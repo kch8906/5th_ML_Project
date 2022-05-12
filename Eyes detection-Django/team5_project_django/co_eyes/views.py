@@ -1,68 +1,50 @@
 from .models import Predictlabel, Temp
-from django.shortcuts import redirect, render, get_object_or_404
-from django.db.models import F, Func, Value, CharField
-from datetime import datetime
+from django.shortcuts import redirect, render
 import joblib
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
-
-# Create your views here.
-# def co_eyes(request):
-#     class_object = Temp.objects.last()
-#     return render(request, "main.html", {'class_object': class_object})
+import seaborn as sns
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 
 def predict(request):
     object_name = Temp.objects.last()
     temp = object_name.temperature
     humid = object_name.humidity
+    co2 = object_name.co2
 
     temp = float(temp)
     humid = float(humid)
-    co2 = 1000
+    co2 = float(co2)
 
-    estimator = joblib.load(r'C:\Users\a\Desktop\5th_ML_Project\Eyes detection-Django\team5_project_django\static\ml_model\temp_lightgbm.pkl')
+    df = pd.read_csv('/home/crysis/Workspace/5th_ML_Project/Eyes detection-Django/team5_project_django/static/csv/temp.csv')
+    x = df.drop('label', axis=1, inplace=False)
+
+
+    estimator = joblib.load(r'/home/crysis/Workspace/5th_ML_Project/Eyes detection-Django/team5_project_django/static/ml_model/Temp_LinearRegression.pkl')
 
     x_test = [[temp, humid, co2]]
+    scaler = StandardScaler()
+    test_scaled = scaler.fit(x).transform(x_test)
+    test_pred2 = estimator.predict(test_scaled)
+    y_pred_proba = np.floor(estimator.predict_proba(test_scaled)[:, 0] * 100)
 
-    y_predict = estimator.predict(x_test)
-    y_pred_proba = np.floor(estimator.predict_proba(x_test)[:, 1] * 100)
+
 
     df = pd.DataFrame(list(Predictlabel.objects.all().values()))
     df['register_date'] = df['register_date'].dt.day
     df = df.groupby('register_date').max()
 
-    plt.plot(df.index, df['total_sleep_count'])
+    plt.grid(True)
+    sns.lineplot(df.index,df['total_sleep_count'],color='slateblue', marker='o')
+    plt.fill_between(df.index,df['total_sleep_count'],color='lightpink', alpha=0.4)
     plt.xticks(df.index)
+    plt.yticks(df['total_sleep_count'])
     plt.xlabel('Date')
     plt.ylabel('Sleep_count')
-    plt.legend()
+    plt.title('Number of drowsy driving',fontsize=16)
 
-    plt.savefig('/home/crysis/Workspace/5th_ML_Project/Eyes detection-Django/team5_project_django/static/imgs/graph.png')
+    plt.savefig('/home/crysis/Workspace/5th_ML_Project/Eyes detection-Django/team5_project_django/static/img')
 
-    return render(request, 'main.html', {'y_predict': y_pred_proba})
-
-
-# def graph(request):
-#     df = pd.DataFrame(list(Predictlabel.objects.all().values()))
-#     df['register_date'] = df['register_date'].dt.day
-#     df = df.groupby('register_date').max()
-#
-#     plt.plot(df.index, df['total_sleep_count'])
-#     plt.xticks(df.index)
-#     plt.xlabel('Date')
-#     plt.ylabel('Sleep_count')
-#     plt.legend()
-#
-#     plt.savefig('/home/crysis/Workspace/5th_ML_Project/Eyes detection-Django/team5_project_django/static/imgs/graph.png')
-#
-#
-#     return render(request, 'main.html')
-
-
-
-
-
-
-
+    return render(request, 'main.html', {'y_predict': y_pred_proba, 'temp': temp, 'co2': co2, 'humid':  humid})
