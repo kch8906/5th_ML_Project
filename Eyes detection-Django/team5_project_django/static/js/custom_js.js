@@ -25,7 +25,7 @@ window.onload = function () {
                     $("html,body").stop().animate({
                         scrollTop: moveTop + 'px'
                     }, {
-                        duration: 800, complete: function () {
+                        duration: 200, complete: function () {
                         }
                     });
                 });

@@ -51,107 +51,111 @@
 {#                </div>#}
 {#            </form>#}
         </nav>
-            <div id="layoutSidenav_content">
+            <div class="img_101"> <!--  id="layoutSidenav_content" -->
                 <main>
-                    <div class="container-fluid px-4 text-center">
+
+                    <div>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
-                                            <div class="row">
-                            <div class="col-sm-auto" style="width:13rem">
-                                <div class="card bg-warning text-white">
-                                    <div class="card-body" >
-                                        <span class="F_col_w" style=" font-size:15px; color:white;">온도</span></div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between text-center">
-                                        {% csrf_token %}
-                                            <span class="text-center" style=" font-size:20px; color:white;">
-                                                {{ temp }}°C  </span>
-                                        <div class="small text-white"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-auto text-center" style="width:13rem">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body" >
-                                        <span class="F_col_w" style=" font-size:15px;">이산화탄소</span></div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                        {% csrf_token %}
-                                            <span class="F_col_w" style=" font-size:20px;">
-                                                {{ co2 }} rpm </span>
-                                        <div class="small text-white"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-auto text-center" style="width:13rem"">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body" >
-                                        <span class="F_col_w" style=" font-size:15px;">습도</span></div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                        {% csrf_token %}
-                                            <span class="F_col_w text-center" style=" font-size:20px;">
-                                                {{ humid }}% </span>
-                                        <div class="small text-white"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card text-center" style="width: auto;" >
-                                        {% if y_predict <= 50 %}
-                                            <span style="font-size: 20px;">
-                                                졸릴 확률이 높습니다. 환기를 시켜주세요</span>
-                                        {% else %}
-                                            <span style="font-size: 20px;">
-                                                안전운전 하십시요</span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4" style="width: 20rem;">
-
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1 F_col_b"></i>
-                                        <span class="F_KoPubDotumMedium"
-                                              style="font-size: 28px">주간별 졸음 횟수</span>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <span class="F_col_b F_KOHIBaeumOTF">
+                            <div class="row margin_L_30 flex_w_c">
+                                <div class="col-sm-auto" style="width:13rem">
+                                    <div id="circle" class="card border-danger border_m bg-transparent text-white">
+                                        <div class="padding_T_50 margin_L_60 card-body" >
+                                            <span class="F_col_w" style=" font-size:25px; color:white;">온도</span></div>
+                                            <div class="margin_B_50 d-flex align-items-center justify-content-center">
                                             {% csrf_token %}
-        {#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
-                                            {% for y in y_predict %}
-                                                {{ y }}%
-                                            {% endfor %}
-                                        </span>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        <span class="F_KoPubDotumMedium"
-                                              style="font-size: 28px">졸음 횟수 그래프</span>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="container">
-                                            <img src="/static/img/graph.png" alt="">
+                                                <span class="text-center" style=" font-size:25px; color:white;">
+                                                    {{ temp }}°C  </span>
+                                            <div class="small text-white"></div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-auto text-center" style="width:13rem">
+                                    <div id="circle" class="card text-white mb-4 bg-transparent border_m" style="border-color: #0f5132">
+                                        <div class="card-body" >
+                                            <span class="F_col_w" style=" font-size:25px;">이산화탄소</span></div>
+                                            <div class="card-footer d-flex align-items-center justify-content-center">
+                                            {% csrf_token %}
+                                                <span class="F_col_w" style="font-size:30px;">
+                                                    {{ co2 }} rpm </span>
+                                            <div class="small text-white"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-auto text-center" style="width:13rem"">
+                                    <div id="circle" class="card bg-primary text-white mb-4">
+                                        <div class="card-body" >
+                                            <span class="F_col_w" style=" font-size:25px;">습도</span></div>
+                                            <div class="card-footer d-flex align-items-center justify-content-center">
+                                            {% csrf_token %}
+                                                <span class="F_col_w text-center" style=" font-size:20px;">
+                                                    {{ humid }}% </span>
+                                            <div class="small text-white"></div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
 
+                    <div class="row flex_w_c">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card text-center" style="width: auto;" >
+                                    {% if y_predict <= 50 %}
+                                        <span style="font-size: 20px;">
+                                            졸릴 확률이 높습니다. 환기를 시켜주세요</span>
+                                    {% else %}
+                                        <span style="font-size: 20px;">
+                                            안전운전 하십시오</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                <img class="img_100" src="/static/img/drive04.png">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4" style="width: 20rem;">
+
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1 F_col_b"></i>
+                                    <span class="F_KoPubDotumMedium"
+                                          style="font-size: 28px">주간별 졸음 횟수</span>
+                                </div>
+
+                                <div class="card-body">
+                                    <span class="F_col_b F_KOHIBaeumOTF">
+                                        {% csrf_token %}
+    {#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
+                                        {% for y in y_predict %}
+                                            {{ y }}%
+                                        {% endfor %}
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    <span class="F_KoPubDotumMedium"
+                                          style="font-size: 28px">졸음 횟수 그래프</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <img src="/static/img/graph.png" alt="">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- <img class="img_100" src="/static/img/drive04.png">-->
+                    </div>
 
                 </main>
 
