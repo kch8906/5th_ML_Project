@@ -17,10 +17,11 @@ def predict(request):
     object_name = Temp.objects.last()
     temp = object_name.temperature
     humid = object_name.humidity
+    co2 = object_name.co2
 
     temp = float(temp)
     humid = float(humid)
-    co2 = 1000
+    co2 = float(co2)
 
     day_list = Predictlabel.objects.values(
         'register_date__day'
@@ -48,7 +49,12 @@ def predict(request):
 
     plt.savefig('C:/jupyter_home/Machine_Learning/5th_ML_Project/Eyes detection-Django/team5_project_django/static/img/graph.png')
 
-    return render(request, 'main.html', {'y_predict': y_pred_proba})
+    # if y_pred_proba >= 70 :
+    #     comment = '졸릴 확률이 높습니다. 환기를 시켜주세요'
+    # else:
+    #     comment = '안전한 운전 하십시요'
+
+    return render(request, 'main.html', {'y_predict': y_pred_proba, 'temp': temp, 'co2' : co2, 'humid' : humid})
 
 
 # def graph(request):
