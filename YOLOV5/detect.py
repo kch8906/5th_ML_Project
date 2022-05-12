@@ -41,7 +41,7 @@ import serial
 from datetime import datetime
 
 # 아두이노 시리얼 전송 
-ser = serial.Serial('/dev/ttyACM4', 9600) # Linux Arduino Serial Port
+ser = serial.Serial('/dev/ttyACM1', 9600) # Linux Arduino Serial Port
 
 # 데이터베이스 연결
 db= pymysql.connect( # db 연결
