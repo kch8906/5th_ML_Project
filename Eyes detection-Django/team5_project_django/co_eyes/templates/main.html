@@ -33,23 +33,49 @@
     <script type="text/javascript" src="/static/js/custom_js.js"></script>
 
 
-    <div class="box" >
-        <img class="img_100" src="/static/img/drive02.png">
+    <div class="box img_100" >
+        <div class="flex_sa"
+             style="position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    margin-bottom: 50px;
+                    margin-right: 30px">
+            {#온도#}
+            <div class="col-sm-auto" style="width:13rem;">
+                <div class="d-flex align-items-center justify-content-center">
+                    {% csrf_token %}
+                    <span class="text-center F_1" style="color:white;">
+                    {{ temp }}°C  </span>
+                </div>
+            </div>
+
+            {#이산화탄소#}
+            <div class="col-sm-auto" style="width:17rem">
+                <div class="d-flex align-items-center justify-content-center">
+                    {% csrf_token %}
+                    <span class="text-center F_1" style="color:white;">
+                    {{ co2 }} rpm </span>
+                </div>
+            </div>
+
+            {#습도#}
+            <div class="col-sm-auto" style="width:13rem">
+                <div class="d-flex align-items-center justify-content-center">
+                    {% csrf_token %}
+                    <span class="text-center F_1" style="color:white;">
+                    {{ humid }}% </span>
+                </div>
+            </div>
+
+        </div>
+{#        <img class="img_100" src="/static/img/drive02.png">#}
     </div>
 
     <div class="box"> <!-- img_101 -->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3 F_leferi" href="main.html">졸음운전 통계</a>
-{#            <!-- Sidebar Toggle-->#}
-{#            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>#}
-{#            <!-- Navbar Search-->#}
-{#            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">#}
-{#                <div class="input-group">#}
-{#                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />#}
-{#                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>#}
-{#                </div>#}
-{#            </form>#}
+
         </nav>
             <div class="img_101"> <!--  id="layoutSidenav_content" -->
                 <main>
@@ -60,9 +86,9 @@
                         </ol>
                             <div class="row margin_L_30 flex_w_c">
                                 <div class="col-sm-auto" style="width:13rem">
-                                    <div id="circle" class="card border-danger border_m bg-transparent text-white">
-                                        <div class="padding_T_50 margin_L_60 card-body" >
-                                            <span class="F_col_w" style=" font-size:25px; color:white;">온도</span></div>
+                                    <div id="circle" class="card border_m bg-transparent text-white" style="border-color: #0f5132">
+                                        <div class="margin_L_50 card-body padding_T_35">
+                                            <span class="F_col_w" style=" font-size:25px;">온도</span></div>
                                             <div class="margin_B_50 d-flex align-items-center justify-content-center">
                                             {% csrf_token %}
                                                 <span class="text-center" style=" font-size:25px; color:white;">
@@ -71,25 +97,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-auto text-center" style="width:13rem">
+
+                                <div class="col-sm-auto" style="width:13rem">
                                     <div id="circle" class="card text-white mb-4 bg-transparent border_m" style="border-color: #0f5132">
-                                        <div class="card-body" >
+                                        <div class="card-body padding_T_35" style="margin-left: 20px">
                                             <span class="F_col_w" style=" font-size:25px;">이산화탄소</span></div>
-                                            <div class="card-footer d-flex align-items-center justify-content-center">
+                                            <div class="margin_B_50 d-flex align-items-center justify-content-center">
                                             {% csrf_token %}
-                                                <span class="F_col_w" style="font-size:30px;">
+                                                <span class="F_col_w" style="font-size:25px;">
                                                     {{ co2 }} rpm </span>
                                             <div class="small text-white"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-auto text-center" style="width:13rem"">
-                                    <div id="circle" class="card bg-primary text-white mb-4">
-                                        <div class="card-body" >
+                                <div class="col-sm-auto text-center" style="width:13rem">
+                                    <div id="circle" class="card border_m bg-transparent text-white" style="border-color: #0f5132">
+                                        <div class="card-body padding_T_35">
                                             <span class="F_col_w" style=" font-size:25px;">습도</span></div>
-                                            <div class="card-footer d-flex align-items-center justify-content-center">
+                                            <div class="margin_B_50 d-flex align-items-center justify-content-center">
                                             {% csrf_token %}
-                                                <span class="F_col_w text-center" style=" font-size:20px;">
+                                                <span class="F_col_w" style="font-size:25px;">
                                                     {{ humid }}% </span>
                                             <div class="small text-white"></div>
                                         </div>
@@ -112,8 +139,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xl-6">
+                    <div class="row flex_w_c">
+                        <div class="col-xl-6 flex_w_e">
                             <div class="card mb-4" style="width: 20rem;">
 
                                 <div class="card-header">
