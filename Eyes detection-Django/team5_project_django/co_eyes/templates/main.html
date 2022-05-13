@@ -6,7 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>!!졸음운전 안돼!!</title>
+        <title>Drowsiness Detection</title>
+
+        <link rel="shortcut icon" href="#">
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -19,129 +21,174 @@
 
         <!-- Custom styles for this template -->
         <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
     </head>
 
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" style="background-color: transparent">
+    <!-- JS -->
+    <script type="text/javascript" src="/static/js/custom_js.js"></script>
+
+
+    <div class="box img_100" >
+        <div class="flex_sa"
+             style="position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    margin-bottom: 50px;
+                    margin-right: 30px">
+            {#온도#}
+            <div class="col-sm-auto" style="width:13rem;">
+                <div class="d-flex align-items-center justify-content-center">
+                    {% csrf_token %}
+                    <span class="text-center F_1" style="color:white;">
+                    {{ temp }}°C  </span>
+                </div>
+            </div>
+
+            {#이산화탄소#}
+            <div class="col-sm-auto" style="width:17rem">
+                <div class="d-flex align-items-center justify-content-center">
+                    {% csrf_token %}
+                    <span class="text-center F_1" style="color:white;">
+                    {{ co2 }} rpm </span>
+                </div>
+            </div>
+
+            {#습도#}
+            <div class="col-sm-auto" style="width:13rem">
+                <div class="d-flex align-items-center justify-content-center">
+                    {% csrf_token %}
+                    <span class="text-center F_1" style="color:white;">
+                    {{ humid }}% </span>
+                </div>
+            </div>
+
+        </div>
+{#        <img class="img_100" src="/static/img/drive02.png">#}
+    </div>
+
+    <div class="box"> <!-- img_101 -->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="main.html">🚗졸음운전 통계🥱❌</a>
-{#            <!-- Sidebar Toggle-->#}
-{#            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>#}
-{#            <!-- Navbar Search-->#}
-{#            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">#}
-{#                <div class="input-group">#}
-{#                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />#}
-{#                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>#}
-{#                </div>#}
-{#            </form>#}
+            <a class="navbar-brand ps-3 F_leferi" href="main.html">졸음운전 통계</a>
+
         </nav>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
+            <div class="img_101"> <!--  id="layoutSidenav_content" -->
                 <main>
-                    <div class="container-fluid px-4 text-center">
-                        <h1 class="mt-2">졸음운전 하지마세요</h1>
+
+                    <div>
                         <ol class="breadcrumb mb-4">
-{#                            <li class="breadcrumb-item active">Dashboard</li>#}
+                            <li class="breadcrumb-item active"></li>
                         </ol>
-                        <div class="row">
-                            <div class="col-sm-auto text-center" style="width: 13rem";>
-                                <div class="card bg-warning text-white">
-                                    <div class="card-body" >
-                                        <span style=" font-size:15px; color:white; font-family: 'Arial Black'">온도</span></div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                        {% csrf_token %}
-                                            <span style=" text-align: right; font-size:20px; color:white; font-family: 'Arial'">
-                                                {{ temp }}°C  </span>
-                                        <div class="small text-white"></div>
-                                    </div>
+{#                            <div class="row margin_L_30 flex_w_c">#}
+{#                                <div class="col-sm-auto" style="width:13rem">#}
+{#                                    <div id="circle" class="card border_m bg-transparent text-white" style="border-color: #0f5132">#}
+{#                                        <div class="margin_L_50 card-body padding_T_35">#}
+{#                                            <span class="F_col_w" style=" font-size:25px;">온도</span></div>#}
+{#                                            <div class="margin_B_50 d-flex align-items-center justify-content-center">#}
+{#                                            {% csrf_token %}#}
+{#                                                <span class="text-center" style=" font-size:25px; color:white;">#}
+{#                                                    {{ temp }}°C  </span>#}
+{#                                            <div class="small text-white"></div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                                <div class="col-sm-auto" style="width:13rem">#}
+{#                                    <div id="circle" class="card text-white mb-4 bg-transparent border_m" style="border-color: #0f5132">#}
+{#                                        <div class="card-body padding_T_35" style="margin-left: 20px">#}
+{#                                            <span class="F_col_w" style=" font-size:25px;">이산화탄소</span></div>#}
+{#                                            <div class="margin_B_50 d-flex align-items-center justify-content-center">#}
+{#                                            {% csrf_token %}#}
+{#                                                <span class="F_col_w" style="font-size:25px;">#}
+{#                                                    {{ co2 }} rpm </span>#}
+{#                                            <div class="small text-white"></div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-sm-auto text-center" style="width:13rem">#}
+{#                                    <div id="circle" class="card border_m bg-transparent text-white" style="border-color: #0f5132">#}
+{#                                        <div class="card-body padding_T_35">#}
+{#                                            <span class="F_col_w" style=" font-size:25px;">습도</span></div>#}
+{#                                            <div class="margin_B_50 d-flex align-items-center justify-content-center">#}
+{#                                            {% csrf_token %}#}
+{#                                                <span class="F_col_w" style="font-size:25px;">#}
+{#                                                    {{ humid }}% </span>#}
+{#                                            <div class="small text-white"></div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                            </div>#}
+{#                        </div>#}
+
+           <div class="col-sm-auto" style="width:25rem">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="text-center " style="width: auto;" >
+                        {% if y_predict <= 50 %}
+                            <span style="font-size: 40px; color: white">
+                                졸릴 확률이 높습니다. 환기를 시켜주세요</span>
+                        {% else %}
+                            <span style="font-size: 40px; color: white">
+                                안전운전 하십시오</span>
+                        {% endif %}
+                    </div>
+                </div>
+                    </div>
+                    <div class="row flex_w_c">
+                        <div class="col-xl-6 flex_w_e">
+                            <div class="card mb-4" style="width: 20rem;">
+
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1 F_col_b"></i>
+                                    <span class="F_KoPubDotumMedium"
+                                          style="font-size: 28px">주간별 졸음 횟수</span>
                                 </div>
-                            </div>
-                            <div class="col-sm-auto text-center" style="width: 13rem;">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body" >
-                                        <span style=" font-size:15px; color:white; font-family: 'Arial Black'">이산화탄소</span></div>
-                                        <div class="card-footer d-flex align-items-center justify-content-center">
+
+                                <div class="card-body">
+                                    <span class="F_col_b F_KOHIBaeumOTF">
                                         {% csrf_token %}
-                                            <span style=" font-size:20px; color:white; font-family: 'Arial'">
-                                                {{ co2 }} rpm </span>
-                                        <div class="small text-white"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-auto text-center" style="width: 13rem;">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body" >
-                                        <span style=" font-size:15px; color:white; font-family: 'Arial Black'">습도</span></div>
-                                        <div class="card-footer d-flex align-items-center justify-content-between">
-                                        {% csrf_token %}
-                                            <span style=" font-size:20px; color:white; font-family: 'Arial'">
-                                                {{ humid }}% </span>
-                                        <div class="small text-white"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card text-center" style="width: auto;" >
-                                        {% if y_predict <= 50 %}
-                                            <span style="font-weight: lighter; font-size: 20px; color: #084298; font-family: '나눔고딕'">
-                                                졸릴 확률이 높습니다. 환기를 시켜주세요</span>
-                                        {% else %}
-                                            <span style="font-weight: lighter; font-size: 20px; color: #084298; font-family: '나눔고딕'">
-                                                안전운전 하십시요</span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4" style="width: 20rem;">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        주간별 졸음 횟수
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="70%" height="30"></canvas>
-                                        {% csrf_token %}
+    {#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
                                         {% for y in y_predict %}
-                                        <span style=" font-size:40px; color:black; font-family: 'Arial Black'">
-                                        {{ y }}%
-                                        </span>
+                                            {{ y }}%
                                         {% endfor %}
-                                    </div>
+                                    </span>
                                 </div>
+
                             </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        졸음 횟수 그래프
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas>
-                                        <div class="container">
-                                            <img src="/static/img/graph.png" alt="">
+                        </div>
+
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    <span class="F_KoPubDotumMedium"
+                                          style="font-size: 28px">졸음 횟수 그래프</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <img src="/static/img/graph.png" alt="">
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <!-- <img class="img_100" src="/static/img/drive04.png">-->
+                    </div>
+
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; team5_project eyes object detector</div>
-                        </div>
-                    </div>
-                </footer>
+
             </div>
-        </div>
+    </div>
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -149,5 +196,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+
     </body>
 </html>
