@@ -43,6 +43,6 @@ def predict(request):
     plt.ylabel('Sleep_count')
     plt.title('Number of drowsy driving',fontsize=16)
 
-    plt.savefig('C:/jupyter_home/Machine_Learning/ML_Project_5th/5th_ML_Project/Eyes detection-Django/team5_project_django/static/img/graph.png')
+    plt.savefig('C:/jupyter_home/Machine_Learning/ML_Project_5th/5th_ML_Project/Eyes detection-Django/team5_project_django/static/img/graph.png', transparent=True)
 
     return render(request, 'main.html', {'y_predict': y_pred_proba, 'temp': temp, 'co2' : co2, 'humid' : humid})

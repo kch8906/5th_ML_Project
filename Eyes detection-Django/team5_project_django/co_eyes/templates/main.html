@@ -131,13 +131,13 @@
     </div>
 
 
-    <div class="box" > <!-- img_101 -->
+    <div class="box" style="background-color: #1c1c1c"> <!-- img_101 -->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3 F_leferi" href="main.html">졸음운전 통계</a>
 
         </nav>
-            <div class="img_101"> <!--  <div> -->
+            <div> <!--  <div class="img_101"> -->
 
                 <div>
                     <ol class="breadcrumb mb-4">
@@ -146,10 +146,10 @@
 
                     <div class="row flex_w_c">
                         <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card text-center" style="width: auto;" >
+                            <div class=" mb-4">
+                                <div class=" text-center" style="width: auto;" >
                                     {% if y_predict >= 60 %}
-                                        <span style="font-size: 20px;">
+                                        <span style="font-size: 20px; color: white;">
                                             졸음 운전할 확률이 높습니다. 환기를 시켜주세요</span>
                                     {% else %}
                                         <span style="font-size: 20px;">
@@ -163,16 +163,17 @@
                         <div class="col-xl-6"
                              style="width: 300px;
                              height: 606px;">
-                            <div class="card mb-4" style="width: 20rem;">
+                            <div class="mb-4" style="width: 20rem;">
 
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area me-1 F_col_b"></i>
+                                <div>
+                                    <i class="fas fa-chart-area me-1"></i>
                                     <span class="F_KoPubDotumMedium"
-                                          style="font-size: 28px">주간별 졸음 횟수</span>
+                                          style="font-size: 28px;
+                                                 color: white">주간별 졸음 횟수</span>
                                 </div>
 
                                 <div class="card-body">
-                                    <span class="F_col_b F_KOHIBaeumOTF">
+                                    <span class="F_col_w F_KOHIBaeumOTF">
                                         {% csrf_token %}
     {#                                    {{class_object.temperature}} C, {{ class_object.humidity }} % <br>#}
                                         {% for y in y_predict %}
@@ -181,20 +182,27 @@
                                     </span>
                                 </div>
                             </div>
+
+                            <div>
+                                <h2>졸음운전 교통사고, 얼마나 위험한가?</h2>
+                                <p>한국도로공사에 따르면 지난 5년간 고속도로 사망사고의 원인 중 69.8%가 졸음 및 주시태만에 의한 것! 고속도로 교통사고 발생원인 1위도
+                                    졸음운전!</p>
+
+                            </div>
                         </div>
 
-                        <div class="col-xl-6"
+                        <div class="col-xl-6 F_col_w"
                              style="width: 700px;
                              height: 606px;
                              margin-left: 80px">
-                            <div class="card mb-4">
+                            <div class="mb-4 ">
 
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar me-1"></i>
+                                <div class="">
+                                    <i class="fas fa-chart-bar me-1 "></i>
                                     <span class="F_KoPubDotumMedium"
                                           style="font-size: 28px">졸음 횟수 그래프</span>
                                 </div>
-                                <div class="card-body">
+                                <div class="">
                                     <img src="/static/img/graph.png"
                                          size="100%">
                                 </div>

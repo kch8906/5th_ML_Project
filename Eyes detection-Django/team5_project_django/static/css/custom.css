@@ -96,6 +96,9 @@ footer{
     color: #000000;
     background-color: transparent;
 }
+svg{
+    color: #ffffff;
+}
 .F_leferi{
     font-family: 'LeferiPoint-BlackA';
 }
