@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'co_eyes.apps.CoEyesConfig'
+    'co_eyes.apps.CoEyesConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
