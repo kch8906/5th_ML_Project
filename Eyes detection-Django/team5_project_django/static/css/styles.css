@@ -11420,7 +11420,7 @@ body {
 
 .sb-topnav {
   padding-left: 0;
-  height: 56px;
+  height: 40px; /* 상단 네비게이션바 폭*/
   z-index: 1039;
 }
 .sb-topnav .navbar-brand {
