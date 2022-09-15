@@ -1,13 +1,24 @@
-# 5th_ML_Project
+# 운전자 졸음 탐지와 졸음 환경 감지 서비스
 
-1 - 딥러닝(Face Object Detection) 모델 정하기  == 완료 <br>
-2 - Wabcam에서 예측된 label Database 전송  ==  완료<br>
-3 - 예측된 값이 3초동안 close일 경우 아두이노 시리얼 통신 == 완료<br>
-4 - 추가) 이전 접속과 현재 접속 문제 == 완료<br>
-5 - MYSQL 원격 접속 == 완료<br>
-6 - 추가) 아두이노 시리얼 통신, DB 연결 == 완료<br>
-7 - 추가) 아두이노 온습도, 이산화탄소, 조도센서 연결 및 DB 데이터 전송(다른 테이블) == 완료 <br> 
-8 - 장고 MYSQL 모델(명세) 작성 == 완료<br> 
-9 - 온습도, 이산화탄소 졸음 예측 모델 생성 == 완료<br>
-10 - DJANGO 그래프, 각 지표 SCALAR 값 표시 == 완료<br>
-11 - DJANGO FRONTEND == 진행 중 <br>
+딥러닝(Object Detection)으로 운전자의 눈 감은 시점을 3초 이상 지속 되었을 때 알람이 울리며 아두이노센서데이터를 통해 현재 운전환경이 졸음이 오는 환경인지 아닌지를 머신러닝(Logistic Regression)을 통해 실시간으로 알려주는 서비스
+
+# Skill
+### AI Agorithms : Object Detection(Yolov5), Classification(Logistic Regression)
+
+### Arduino : 온습도 센서, Co2 센서, 부저
+
+### Database : MYSQL
+
+### Frontend / Backend : Django
+
+
+# 개발 환경
+Ubuntu 20.04 (local)
+
+# Pipeline
+![img1 daumcdn1 png](https://user-images.githubusercontent.com/64409693/190302202-cbada428-226a-4de6-900b-ebe0370f2ace.png)
+
+
+# Blog
+https://crysis.tistory.com/3?category=984169
+
